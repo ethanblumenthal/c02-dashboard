@@ -89,3 +89,13 @@ d3.queue()
       }
     }
   });
+
+function formatDataType(key) {
+  return key[0].toUpperCase() + key.slice(1).replace(/[A-Z]/g, c => " " + c);
+}
+
+function getPercentage(d) {
+  var angle = d.endAngle - d.startAngle;
+  var fraction = 100 * angle / (Math.PI * 2);
+  return fraction.toFixed(2) + "%";
+}
