@@ -11,3 +11,21 @@ d3.queue()
       year: +row.Year
     }
   })
+  .await(function(error, mapData, data) {
+    if (error) throw error;
+
+    var extremeYears = d3.extent(data, d => d.year);
+    var currentYear = extremeYears[0];
+    var currentDataType = d3.select('input[name="data-type"]:checked')
+                            .attr("value");
+    var geoData = topojson.feature(mapData, mapData.objects.countries).features;
+
+    var width = +d3.select(".chart-container")
+                   .node().offsetWidth;
+    var height = 300;
+
+    createMap(width, width * 4 / 5);
+    createPie(width, height);
+    drawMap(geoData, data, currentYear, currentDataType);
+    drawPie(data, currentYear);
+  });
