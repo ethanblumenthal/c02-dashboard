@@ -28,4 +28,20 @@ d3.queue()
     createPie(width, height);
     drawMap(geoData, data, currentYear, currentDataType);
     drawPie(data, currentYear);
+
+    d3.select("#year")
+        .property("min", currentYear)
+        .property("max", extremeYears[1])
+        .property("value", currentYear)
+        .on("input", () => {
+          currentYear = +d3.event.target.value;
+          drawMap(geoData, data, currentYear, currentDataType);
+          drawPie(data, currentYear);
+        });
+
+    d3.selectAll('input[name="data-type"]')
+        .on("change", () => {
+          currentDataType = d3.event.target.value;
+          drawMap(geoData, data, currentYear, currentDataType);
+        });
   });
