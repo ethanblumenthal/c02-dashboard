@@ -24,3 +24,9 @@ function createBar(width, height) {
       .style("text-anchor", "middle")
       .classed("bar-title", true);
 }
+
+function highlightBars(year) {
+  d3.select("#bar")
+    .selectAll("rect")
+      .attr("fill", d => d.year === year ? "#16a085" : "#1abc9c");
+}
