@@ -62,3 +62,7 @@ function drawMap(geoData, climateData, year, dataType) {
   d3.select(".map-title")
       .text("Carbon dioxide " + graphTitle(dataType) + ", " + year);
 }
+
+function graphTitle(str) {
+  return str.replace(/[A-Z]/g, c => " " + c.toLowerCase());
+}
